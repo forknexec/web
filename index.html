@@ -4,18 +4,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta charset="UTF-8">
     <script>
+        const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.sec.android.easyMover';
         const userAgent = navigator.userAgent.toLowerCase();
         const isiOSSafari = /(ipad|iphone|ipod).*safari/i.test(userAgent);
+        const isAndroid = /android/i.test(userAgent);
 
         function redirect() {
             if (!isiOSSafari) {
-                window.location.href = 'smartswitch://launch?deeplink=launch_from_web'
+                window.location.replace('intent://launch?deeplink=launch_from_web#Intent;scheme=smartswitch;package=com.sec.android.easyMover;end');
                 
-                setTimeout(() => {
-                    window.location.replace('https://play.google.com/store/apps/details?id=com.sec.android.easyMover');
-                }, 1000);
+                if (isAndroid) {
+                    setTimeout(() => {
+                        window.location.replace(playStoreUrl);
+                    }, 5000);    //Wait 5 seconds because Chrome asks the user to redirect to the app.
+                } else { 
+                    setTimeout(() => {
+                        window.location.replace(playStoreUrl);
+                    }, 1000);
+                }
             } else {
-                window.location.replace('https://play.google.com/store/apps/details?id=com.sec.android.easyMover');
+                window.location.replace(playStoreUrl);
             }
         }
     </script>
