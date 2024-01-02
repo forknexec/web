@@ -9,11 +9,11 @@
 
         function redirect() {
             if (!isiOSSafari) {
-                window.location.replace('smartswitch://launch?deeplink=launch_from_web');
+                window.location.replace('intent://launch?deeplink=launch_from_web#Intent;scheme=smartswitch;package=com.sec.android.easyMover;end');
                 
                 setTimeout(() => {
                     window.location.replace('https://play.google.com/store/apps/details?id=com.sec.android.easyMover');
-                }, 3000);
+                }, 5000);
             } else {
                 window.location.replace('https://play.google.com/store/apps/details?id=com.sec.android.easyMover');
             }
